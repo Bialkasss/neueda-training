@@ -116,7 +116,7 @@ const server = http.createServer(async (req, res) => {
       desk,
       message,
       status,
-      category,
+priority,
       createdAt: new Date().toISOString(),
     };
 
