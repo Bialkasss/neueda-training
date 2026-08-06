@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DeskNotify Live</title>
+  <title>DeskNotify Signals</title>
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
   <header class="top">
     <div class="brand">
       <p class="eyebrow">Northvale Ops</p>
-      <h1>DeskNotify Live</h1>
-      <p class="sub">Live desk alerts for the trading floor</p>
+      <h1>DeskNotify Signals</h1>
+      <p class="sub">Live desk signals for the trading floor</p>
     </div>
     <div class="top-right">
       <div id="health" class="pill">checking…</div>
@@ -38,7 +38,12 @@
     <div class="col-main">
       <!-- Track Alpha: filter controls go here -->
       <div id="filters" class="filters-slot" data-track="alpha">
-        <p class="slot-hint">Track Alpha · filters (All / Open / Acked)</p>
+        <div class="filter-row" role="group" aria-label="Filter alerts">
+          <span class="filters-label">Filters:</span>
+          <button type="button" class="chip is-active" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="chip" data-filter="open" aria-pressed="false">Open</button>
+          <button type="button" class="chip" data-filter="acked" aria-pressed="false">Acked</button>
+        </div>
       </div>
 
       <section class="panel">
@@ -51,11 +56,27 @@
     </div>
 
     <aside class="col-side">
-      <!-- Track Bravo: create-alert form goes here -->
+      <!-- Track Bravo: create-signal form goes here -->
       <section class="panel side-panel" id="create-slot" data-track="bravo">
-        <h2>Post an alert</h2>
-        <p class="slot-hint">Track Bravo · create form wires here</p>
-        <p class="muted small">Desks will post without restarting the server.</p>
+        <h2>Post a signal</h2>
+        <form id="create-form" novalidate>
+          <label class="field-label" for="desk-input">Desk</label>
+          <input id="desk-input" name="desk" type="text" required maxlength="80" placeholder="e.g. FX-Floor" />
+
+          <label class="field-label" for="message-input">Message</label>
+          <textarea id="message-input" name="message" required maxlength="300" rows="4" placeholder="Describe what needs attention"></textarea>
+
+          <label class="field-label" for="category-input">Category</label>
+          <select id="category-input" name="category">
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low" selected>Low</option>
+          </select>
+
+          <button class="btn" type="submit">Post signal</button>
+          <p id="create-feedback" class="small" role="status" aria-live="polite"></p>
+        </form>
+        <p class="muted small">Desks can post without restarting the server.</p>
       </section>
 
       <section class="panel side-panel legend">

@@ -15,6 +15,7 @@ let alerts = [
   { id: 3, desk: "Ops-Night", message: "Printer jam on floor 12 — escalation pending", status: "open", priority: "low", createdAt: "2026-03-10T09:05:00Z" },
 ];
 let nextId = 4;
+const ALLOWED_CATEGORIES = ["high", "medium", "low"];
 
 const MIME = {
   ".html": "text/html; charset=utf-8",
@@ -74,9 +75,53 @@ const server = http.createServer(async (req, res) => {
     return send(res, 200, { alerts });
   }
 
-  // Round-1 Bravo will extend POST /api/alerts here.
   if (req.method === "POST" && url === "/api/alerts") {
-    return send(res, 501, { error: "not implemented — Track Bravo" });
+    let body;
+    try {
+      body = await readBody(req);
+    } catch {
+      return send(res, 400, { error: "invalid JSON body" });
+    }
+
+    if (!body || typeof body !== "object" || Array.isArray(body)) {
+      return send(res, 400, { error: "request body must be a JSON object" });
+    }
+
+    const desk = typeof body.desk === "string" ? body.desk.trim() : "";
+    const message = typeof body.message === "string" ? body.message.trim() : "";
+    const status = body.status === undefined ? "open" : body.status;
+    const category = body.category === undefined ? "low" : body.category;
+
+    if (!desk) {
+      return send(res, 400, { error: "desk is required" });
+    }
+    if (!message) {
+      return send(res, 400, { error: "message is required" });
+    }
+    if (typeof status !== "string") {
+      return send(res, 400, { error: "status must be a string when provided" });
+    }
+    if (status !== "open" && status !== "acked") {
+      return send(res, 400, { error: "status must be one of: open, acked" });
+    }
+    if (typeof category !== "string") {
+      return send(res, 400, { error: "category must be a string when provided" });
+    }
+    if (!ALLOWED_CATEGORIES.includes(category)) {
+      return send(res, 400, { error: `category must be one of: ${ALLOWED_CATEGORIES.join(", ")}` });
+    }
+
+    const alert = {
+      id: nextId++,
+      desk,
+      message,
+      status,
+      category,
+      createdAt: new Date().toISOString(),
+    };
+
+    alerts.push(alert);
+    return send(res, 201, { alert });
   }
 
   if (url.startsWith("/api/")) return send(res, 404, { error: "unknown api route" });
