@@ -54,6 +54,7 @@
           ${a.category ? `<span class="badge category">${escapeHtml(a.category)}</span>` : ""}
           ${a.priority ? `<span class="badge priority ${escapeHtml(a.priority)}">${escapeHtml(a.priority)}</span>` : ""}
           <span class="time">${escapeHtml(formatTime(a.createdAt))}</span>
+          ${a.status !== "closed" ? `<button class="btn-dismiss" data-id="${a.id}" aria-label="Dismiss signal">Dismiss</button>` : ""}
         </div>
       </li>
     `).join("");
@@ -72,6 +73,32 @@
     const j = await r.json();
     render(j.alerts || []);
   }
+
+  async function dismissAlert(id) {
+    const r = await fetch(`/api/alerts/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status: "closed" }),
+    });
+    if (!r.ok) {
+      const j = await r.json().catch(() => ({}));
+      throw new Error(j.error || "Failed to dismiss signal");
+    }
+  }
+
+  listEl.addEventListener("click", async (event) => {
+    const btn = event.target.closest(".btn-dismiss");
+    if (!btn) return;
+    const id = Number(btn.dataset.id);
+    btn.disabled = true;
+    try {
+      await dismissAlert(id);
+      await loadAlerts();
+    } catch (err) {
+      btn.disabled = false;
+      alert(err.message);
+    }
+  });
 
   function setCreateFeedback(message, kind) {
     if (!createFeedback) return;
@@ -99,7 +126,7 @@
       const formData = new FormData(createForm);
       const desk = String(formData.get("desk") || "").trim();
       const message = String(formData.get("message") || "").trim();
-      const category = String(formData.get("category") || "low");
+      const category = String(formData.get("priority") || "low");
 
       if (!desk) {
         setCreateFeedback("Desk is required.", "error");

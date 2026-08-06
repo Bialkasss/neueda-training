@@ -124,6 +124,27 @@ const server = http.createServer(async (req, res) => {
     return send(res, 201, { alert });
   }
 
+  const patchMatch = url.match(/^\/api\/alerts\/(\d+)$/);
+  if (req.method === "PATCH" && patchMatch) {
+    const id = Number(patchMatch[1]);
+    const target = alerts.find((a) => a.id === id);
+    if (!target) return send(res, 404, { error: "alert not found" });
+
+    let body;
+    try { body = await readBody(req); } catch { return send(res, 400, { error: "invalid JSON body" }); }
+    if (!body || typeof body !== "object" || Array.isArray(body)) {
+      return send(res, 400, { error: "request body must be a JSON object" });
+    }
+
+    const newStatus = body.status;
+    if (!newStatus || !["open", "acked", "closed"].includes(newStatus)) {
+      return send(res, 400, { error: "status must be one of: open, acked, closed" });
+    }
+
+    target.status = newStatus;
+    return send(res, 200, { alert: target });
+  }
+
   if (url.startsWith("/api/")) return send(res, 404, { error: "unknown api route" });
   return serveStatic(req, res);
 });
