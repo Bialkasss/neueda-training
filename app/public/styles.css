@@ -124,6 +124,7 @@ h1 { margin: 4px 0 6px; font-size: 26px; letter-spacing: -0.02em; font-weight: 7
 .card {
   border: 1px solid var(--line);
   border-left: 4px solid var(--open);
+  border-bottom: 4px solid var(--line);
   border-radius: 10px;
   padding: 14px 16px;
   background: var(--bg-elev);
@@ -131,6 +132,9 @@ h1 { margin: 4px 0 6px; font-size: 26px; letter-spacing: -0.02em; font-weight: 7
   gap: 6px;
 }
 .card[data-status="acked"] { border-left-color: var(--acked); opacity: 0.92; }
+.card[data-priority="high"] { border-bottom-color: #dc2626; }
+.card[data-priority="medium"] { border-bottom-color: #f97316; }
+.card[data-priority="low"] { border-bottom-color: #2563eb; }
 .card .desk {
   font-weight: 700;
   font-size: 13px;
