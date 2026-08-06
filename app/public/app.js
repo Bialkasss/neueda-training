@@ -9,7 +9,7 @@
   const filtersEl = document.getElementById("filters");
   const filterChips = Array.from(filtersEl?.querySelectorAll("[data-filter]") || []);
 
-  let activeFilter = "all";
+  let activeFilter = "open";
   let allAlerts = [];
   const createForm = document.getElementById("create-form");
   const createFeedback = document.getElementById("create-feedback");
