@@ -1,16 +1,16 @@
 :root {
-  --bg: #0f1419;
-  --bg-elev: #1a222c;
-  --ink: #e8eef4;
-  --muted: #8b9aab;
-  --card: #1e2833;
-  --line: #2d3a47;
-  --accent: #3dd6c6;
-  --accent-dim: rgba(61, 214, 198, 0.15);
-  --open: #f59e0b;
-  --acked: #64748b;
-  --ok: #34d399;
-  --danger: #f87171;
+  --bg: #eef4fb;
+  --bg-elev: #ffffff;
+  --ink: #0f1d2e;
+  --muted: #4f637a;
+  --card: #ffffff;
+  --line: #c9d6e6;
+  --accent: #0f766e;
+  --accent-dim: rgba(15, 118, 110, 0.18);
+  --open: #b45309;
+  --acked: #475569;
+  --ok: #15803d;
+  --danger: #b91c1c;
   --font: "Segoe UI", system-ui, sans-serif;
 }
 
@@ -19,8 +19,8 @@ body {
   margin: 0;
   font-family: var(--font);
   background:
-    radial-gradient(800px 360px at 80% -10%, rgba(61, 214, 198, 0.12), transparent 50%),
-    radial-gradient(600px 300px at 0% 100%, rgba(245, 158, 11, 0.08), transparent 45%),
+    radial-gradient(900px 420px at 84% -10%, rgba(59, 130, 246, 0.2), transparent 52%),
+    radial-gradient(640px 320px at 0% 100%, rgba(56, 189, 248, 0.16), transparent 48%),
     var(--bg);
   color: var(--ink);
   min-height: 100vh;
@@ -33,7 +33,7 @@ body {
   gap: 16px;
   padding: 24px 28px 18px;
   border-bottom: 1px solid var(--line);
-  background: rgba(26, 34, 44, 0.9);
+  background: rgba(255, 255, 255, 0.9);
 }
 .eyebrow {
   margin: 0;
@@ -55,7 +55,7 @@ h1 { margin: 4px 0 6px; font-size: 26px; letter-spacing: -0.02em; font-weight: 7
   background: var(--bg-elev);
   color: var(--muted);
 }
-.pill.ok { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 45%, var(--line)); background: rgba(52, 211, 153, 0.1); }
+.pill.ok { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 45%, var(--line)); background: rgba(34, 197, 94, 0.12); }
 .clock { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
 
 .stats {
@@ -95,7 +95,7 @@ h1 { margin: 4px 0 6px; font-size: 26px; letter-spacing: -0.02em; font-weight: 7
   border: 1px dashed var(--line);
   border-radius: 10px;
   padding: 10px 12px;
-  background: rgba(30, 40, 51, 0.5);
+  background: rgba(255, 255, 255, 0.72);
 }
 .slot-hint {
   margin: 0;
@@ -110,6 +110,51 @@ h1 { margin: 4px 0 6px; font-size: 26px; letter-spacing: -0.02em; font-weight: 7
   padding: 16px 18px;
 }
 .side-panel h2 { margin: 0 0 8px; font-size: 15px; }
+.side-panel form { display: grid; gap: 8px; }
+.field-label {
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+.side-panel input,
+.side-panel select,
+.side-panel textarea {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--ink);
+  padding: 10px 11px;
+  font: inherit;
+}
+.side-panel input:focus,
+.side-panel select:focus,
+.side-panel textarea:focus {
+  outline: none;
+  border-color: color-mix(in srgb, var(--accent) 60%, var(--line));
+  box-shadow: 0 0 0 3px var(--accent-dim);
+}
+.btn {
+  margin-top: 4px;
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line));
+  background: color-mix(in srgb, var(--accent) 22%, var(--bg-elev));
+  color: var(--ink);
+  padding: 9px 12px;
+  border-radius: 9px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn:disabled { opacity: 0.7; cursor: wait; }
+.btn:hover:not(:disabled) { filter: brightness(1.08); }
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-dim);
+}
+#create-feedback { margin: 4px 0 0; min-height: 18px; }
+#create-feedback.ok { color: var(--ok); }
+#create-feedback.error { color: var(--danger); }
 .panel-head {
   display: flex;
   justify-content: space-between;
@@ -146,10 +191,11 @@ h1 { margin: 4px 0 6px; font-size: 26px; letter-spacing: -0.02em; font-weight: 7
   letter-spacing: 0.06em;
   padding: 3px 8px;
   border-radius: 999px;
-  background: rgba(245, 158, 11, 0.18);
+  background: rgba(180, 83, 9, 0.14);
   color: var(--open);
 }
-.badge.acked { background: rgba(100, 116, 139, 0.25); color: #cbd5e1; }
+.badge.acked { background: rgba(71, 85, 105, 0.16); color: #334155; }
+.badge.category { background: rgba(15, 118, 110, 0.14); color: #0f766e; }
 .time { font-size: 12px; color: var(--muted); margin-left: auto; }
 
 .legend-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 13px; color: var(--muted); }
