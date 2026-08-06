@@ -149,7 +149,7 @@
       const formData = new FormData(createForm);
       const desk = String(formData.get("desk") || "").trim();
       const message = String(formData.get("message") || "").trim();
-      const category = String(formData.get("category") || "low");
+      const priority = String(formData.get("priority") || "low");
 
       if (!desk) {
         setCreateFeedback("Desk is required.", "error");
@@ -165,7 +165,7 @@
       setCreateFeedback("Posting signal...", null);
 
       try {
-        await createAlert({ desk, message, category });
+        await createAlert({ desk, message, priority });
         createForm.reset();
         await loadAlerts();
         await loadHealth();

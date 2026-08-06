@@ -15,7 +15,7 @@ let alerts = [
   { id: 3, desk: "Ops-Night", message: "Printer jam on floor 12 — escalation pending", status: "open", priority: "low", createdAt: "2026-03-10T09:05:00Z" },
 ];
 let nextId = 4;
-const ALLOWED_CATEGORIES = ["high", "medium", "low"];
+const ALLOWED_PRIORITIES = ["high", "medium", "low"];
 
 const MIME = {
   ".html": "text/html; charset=utf-8",
@@ -90,7 +90,8 @@ const server = http.createServer(async (req, res) => {
     const desk = typeof body.desk === "string" ? body.desk.trim() : "";
     const message = typeof body.message === "string" ? body.message.trim() : "";
     const status = body.status === undefined ? "open" : body.status;
-    const category = body.category === undefined ? "low" : body.category;
+    const rawPriority = body.priority === undefined ? body.category : body.priority;
+    const priority = rawPriority === undefined ? "low" : rawPriority;
 
     if (!desk) {
       return send(res, 400, { error: "desk is required" });
@@ -104,11 +105,12 @@ const server = http.createServer(async (req, res) => {
     if (status !== "open" && status !== "acked") {
       return send(res, 400, { error: "status must be one of: open, acked" });
     }
-    if (typeof category !== "string") {
-      return send(res, 400, { error: "category must be a string when provided" });
+    if (typeof priority !== "string") {
+      return send(res, 400, { error: "priority must be a string when provided" });
     }
-    if (!ALLOWED_CATEGORIES.includes(category)) {
-      return send(res, 400, { error: `category must be one of: ${ALLOWED_CATEGORIES.join(", ")}` });
+    const normalizedPriority = priority.trim().toLowerCase();
+    if (!ALLOWED_PRIORITIES.includes(normalizedPriority)) {
+      return send(res, 400, { error: `priority must be one of: ${ALLOWED_PRIORITIES.join(", ")}` });
     }
 
     const alert = {
@@ -116,7 +118,7 @@ const server = http.createServer(async (req, res) => {
       desk,
       message,
       status,
-      category,
+      priority: normalizedPriority,
       createdAt: new Date().toISOString(),
     };
 
