@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DeskNotify Live</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <p class="eyebrow">Northvale Ops</p>
+      <h1>DeskNotify Live</h1>
+      <p class="sub">Live desk alerts for the trading floor</p>
+    </div>
+    <div class="top-right">
+      <div id="health" class="pill">checking…</div>
+      <div class="clock" id="clock">—</div>
+    </div>
+  </header>
+
+  <section class="stats" aria-label="Board summary">
+    <div class="stat">
+      <span class="stat-n" id="stat-open">—</span>
+      <span class="stat-l">Open</span>
+    </div>
+    <div class="stat">
+      <span class="stat-n" id="stat-acked">—</span>
+      <span class="stat-l">Acked</span>
+    </div>
+    <div class="stat">
+      <span class="stat-n" id="stat-total">—</span>
+      <span class="stat-l">Total</span>
+    </div>
+  </section>
+
+  <main class="layout">
+    <div class="col-main">
+      <!-- Track Alpha: filter controls go here -->
+      <div id="filters" class="filters-slot" data-track="alpha">
+        <p class="slot-hint">Track Alpha · filters (All / Open / Acked)</p>
+      </div>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Board</h2>
+          <span id="count" class="muted">—</span>
+        </div>
+        <ul id="list" class="list"></ul>
+      </section>
+    </div>
+
+    <aside class="col-side">
+      <!-- Track Bravo: create-alert form goes here -->
+      <section class="panel side-panel" id="create-slot" data-track="bravo">
+        <h2>Post an alert</h2>
+        <p class="slot-hint">Track Bravo · create form wires here</p>
+        <p class="muted small">Desks will post without restarting the server.</p>
+      </section>
+
+      <section class="panel side-panel legend">
+        <h2>How to read the board</h2>
+        <ul class="legend-list">
+          <li><span class="dot open"></span> Open — needs eyes</li>
+          <li><span class="dot acked"></span> Acked — someone owns it</li>
+          <li><span class="dot prio"></span> Priority badge — Track Charlie</li>
+        </ul>
+      </section>
+    </aside>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

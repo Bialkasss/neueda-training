@@ -1,0 +1,9 @@
+{
+  "name": "desknotify-live",
+  "private": true,
+  "description": "Agile challenge 1 — desk alerts (no dependencies)",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  }
+}
