@@ -238,6 +238,22 @@ h1 { margin: 4px 0 6px; font-size: 26px; letter-spacing: -0.02em; font-weight: 7
   gap: 6px;
 }
 .card[data-status="acked"] { border-left-color: var(--acked); opacity: 0.92; }
+.card[data-status="closed"] { border-left-color: #94a3b8; opacity: 0.5; }
+
+.btn-dismiss {
+  margin-left: auto;
+  padding: 2px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  letter-spacing: 0.04em;
+}
+.btn-dismiss:hover:not(:disabled) { background: rgba(185, 28, 28, 0.1); border-color: var(--danger); color: var(--danger); }
+.btn-dismiss:disabled { opacity: 0.5; cursor: wait; }
 .card[data-priority="high"] { border-bottom-color: #dc2626; }
 .card[data-priority="medium"] { border-bottom-color: #f97316; }
 .card[data-priority="low"] { border-bottom-color: #2563eb; }
@@ -260,6 +276,7 @@ h1 { margin: 4px 0 6px; font-size: 26px; letter-spacing: -0.02em; font-weight: 7
   color: var(--open);
 }
 .badge.acked { background: rgba(100, 116, 139, 0.25); color: #1d1c1c; }
+.badge.closed { background: rgba(100, 116, 139, 0.14); color: #64748b; }
 
 .badge.priority {
   border: 1px solid transparent;
