@@ -259,7 +259,7 @@ h1 { margin: 4px 0 6px; font-size: 26px; letter-spacing: -0.02em; font-weight: 7
   background: rgba(180, 83, 9, 0.14);
   color: var(--open);
 }
-.badge.acked { background: rgba(100, 116, 139, 0.25); color: #cbd5e1; }
+.badge.acked { background: rgba(100, 116, 139, 0.25); color: #1d1c1c; }
 
 .badge.priority {
   border: 1px solid transparent;

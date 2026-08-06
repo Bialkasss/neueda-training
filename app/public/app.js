@@ -6,16 +6,13 @@
   const statOpen = document.getElementById("stat-open");
   const statAcked = document.getElementById("stat-acked");
   const statTotal = document.getElementById("stat-total");
-<<<<<<< HEAD
   const filtersEl = document.getElementById("filters");
   const filterChips = Array.from(filtersEl?.querySelectorAll("[data-filter]") || []);
 
   let activeFilter = "all";
   let allAlerts = [];
-=======
   const createForm = document.getElementById("create-form");
   const createFeedback = document.getElementById("create-feedback");
->>>>>>> feature/create-alert
 
   function tickClock() {
     clockEl.textContent = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
@@ -101,7 +98,6 @@
     renderCurrentView();
   }
 
-<<<<<<< HEAD
   function wireFilters() {
     if (!filtersEl || filterChips.length === 0) {
       return;
@@ -127,7 +123,6 @@
   }
 
   wireFilters();
-=======
   function setCreateFeedback(message, kind) {
     if (!createFeedback) return;
     createFeedback.textContent = message;
@@ -183,7 +178,6 @@
     });
   }
 
->>>>>>> feature/create-alert
   await loadHealth();
   await loadAlerts();
   // Track Alpha: wire filters into #filters
