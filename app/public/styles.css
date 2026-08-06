@@ -238,9 +238,9 @@ h1 { margin: 4px 0 6px; font-size: 26px; letter-spacing: -0.02em; font-weight: 7
   gap: 6px;
 }
 .card[data-status="acked"] { border-left-color: var(--acked); opacity: 0.92; }
-.card[data-priority="high"] { border-bottom-color: #dc2626; }
-.card[data-priority="medium"] { border-bottom-color: #f97316; }
-.card[data-priority="low"] { border-bottom-color: #2563eb; }
+.card[data-priority="P1"] { border-bottom-color: #dc2626; }
+.card[data-priority="P2"] { border-bottom-color: #f97316; }
+.card[data-priority="P3"] { border-bottom-color: #2563eb; }
 .card .desk {
   font-weight: 700;
   font-size: 13px;
@@ -265,22 +265,21 @@ h1 { margin: 4px 0 6px; font-size: 26px; letter-spacing: -0.02em; font-weight: 7
   border: 1px solid transparent;
 }
 
-.badge.priority.high {
+.badge.priority.P1 {
   color: #ffffff;
   background: #dc2626;
   border-color: #ef4444;
   font-weight: 800;
   box-shadow: 0 0 0 1px rgba(220, 38, 38, 0.4), 0 0 18px rgba(239, 68, 68, 0.55);
-  animation: high-priority-pulse 1.5s ease-in-out infinite;
 }
 
-.badge.priority.medium {
+.badge.priority.P2 {
   color: #fff7ed;
   background: #f97316;
   border-color: #fb923c;
 }
 
-.badge.priority.low {
+.badge.priority.P3 {
   color: #eff6ff;
   background: #2563eb;
   border-color: #60a5fa;
