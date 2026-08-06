@@ -8,11 +8,11 @@ const PORT = Number(process.env.PORT) || 3901;
 const ROOT = __dirname;
 const PUBLIC = path.join(ROOT, "public");
 
-/** @type {{ id:number, desk:string, message:string, status:string, category?:string, createdAt:string }[]} */
+/** @type {{ id:number, desk:string, message:string, status:string, priority?:string, createdAt:string }[]} */
 let alerts = [
-  { id: 1, desk: "Payments-A", message: "Card auth spike — watch queue depth", status: "open", category: "high", createdAt: "2026-03-10T08:12:00Z" },
-  { id: 2, desk: "FX-Floor", message: "Rate feed lag > 2s on EU book", status: "acked", category: "medium", createdAt: "2026-03-10T08:40:00Z" },
-  { id: 3, desk: "Ops-Night", message: "Printer jam on floor 12 — escalation pending", status: "open", category: "low", createdAt: "2026-03-10T09:05:00Z" },
+  { id: 1, desk: "Payments-A", message: "Card auth spike — watch queue depth", status: "open", priority: "high", createdAt: "2026-03-10T08:12:00Z" },
+  { id: 2, desk: "FX-Floor", message: "Rate feed lag > 2s on EU book", status: "acked", priority: "medium", createdAt: "2026-03-10T08:40:00Z" },
+  { id: 3, desk: "Ops-Night", message: "Printer jam on floor 12 — escalation pending", status: "open", priority: "low", createdAt: "2026-03-10T09:05:00Z" },
 ];
 let nextId = 4;
 const ALLOWED_CATEGORIES = ["high", "medium", "low"];

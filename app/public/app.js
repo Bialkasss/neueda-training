@@ -73,7 +73,7 @@
     updateStats(allAlerts);
     countEl.textContent = `${alerts.length} showing`;
     listEl.innerHTML = alerts.map((a) => `
-      <li class="card" data-status="${a.status}" data-id="${a.id}">
+      <li class="card" data-status="${a.status}" data-priority="${a.priority ? escapeHtml(a.priority) : ""}" data-id="${a.id}">
         <div class="desk">${escapeHtml(a.desk)}</div>
         <div class="msg">${escapeHtml(a.message)}</div>
         <div class="meta-row">
