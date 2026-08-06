@@ -38,7 +38,12 @@
     <div class="col-main">
       <!-- Track Alpha: filter controls go here -->
       <div id="filters" class="filters-slot" data-track="alpha">
-        <p class="slot-hint">Track Alpha · filters (All / Open / Acked)</p>
+        <div class="filter-row" role="group" aria-label="Filter alerts">
+          <span class="filters-label">Filters:</span>
+          <button type="button" class="chip is-active" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="chip" data-filter="open" aria-pressed="false">Open</button>
+          <button type="button" class="chip" data-filter="acked" aria-pressed="false">Acked</button>
+        </div>
       </div>
 
       <section class="panel">
